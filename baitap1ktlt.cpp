@@ -1,3 +1,4 @@
+/* Mình tên Khang, chào các bạn, facebook của mình là: https://www.facebook.com/pokemonaremylife.*/
 #include "iostream"
 #include <math.h>
 using namespace std;

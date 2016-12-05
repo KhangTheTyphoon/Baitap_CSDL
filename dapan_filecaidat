@@ -1,0 +1,108 @@
+#include "ThuVien.h"
+
+void Them_Cuoi(NodePtr &List, NodePtr p) {
+	if (List==NULL)
+		List = p;
+	else {
+		NodePtr q = List;
+		while(q->next!=NULL)
+			q = q->next;
+		q->next = p;
+	}
+}
+
+int Dem_X(NodePtr List, int x) {
+	int dem=0;
+	NodePtr p = List;
+	while(p!=NULL) {
+		if (p->data==x)
+			dem++;
+		p = p->next;
+	}
+
+	return dem;
+}
+
+void In_Nguyen_To(NodePtr List) {
+	NodePtr p = List;
+	while(p!=NULL) {
+		if (KT_Nguyen_To(p->data))
+			cout<<" "<<p->data;
+		p = p->next;
+	}
+}
+
+void Noi_Hai_Danh_Sach(NodePtr &List1, NodePtr &List2) {
+	if (List1==NULL)
+		List1 = List2;
+	else {
+		NodePtr q = List1;
+		while(q->next!=NULL)
+			q = q->next;
+		q->next = List2;
+	}
+	List2 = NULL;
+}
+
+void Tach_Chan_Le(NodePtr &List, NodePtr &List1, NodePtr &List2) {
+	while(List!=NULL) {
+		NodePtr p = List;
+		List = p->next;
+		p->next = NULL;
+
+		if (p->data%2==0)
+			Them_Cuoi(List1, p);
+		else
+			Them_Cuoi(List2, p);
+	}
+	List = NULL;
+}
+
+void Xoa_X_Tat_Ca(NodePtr &List, int x) {
+	if (List!=NULL) {
+		while(List!=NULL && List->data==x) {
+			NodePtr p = List;
+			List = p->next;
+			delete p;
+		}
+		NodePtr q = List;
+		NodePtr p = q->next;
+		while (p!=NULL) {
+			if (p->data==x) {
+				q->next = p->next;
+				delete p;
+				p = q->next;
+			} else {
+				q = p;
+				p = q->next;
+			}
+		}
+	}
+}
+
+int KT_Nguyen_To(int x) {
+	if (x<2)
+		return 0;
+	else if (x==2)
+		return 1;
+
+	for(int i = 2; i<=x/2; i++)
+		if (x%i==0)
+			return 0;
+	return 1;
+}
+
+NodePtr CreateNode(int x) {
+	NodePtr p = new Node;
+	p->data = x;
+	p->next = NULL;
+	return p;
+}
+
+void In_Danh_Sach(NodePtr List) {
+	NodePtr p = List;
+	while(p!=NULL) {
+		cout<<" "<<p->data;
+		p = p->next;
+	}
+}
